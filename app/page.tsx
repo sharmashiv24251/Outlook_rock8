@@ -4,6 +4,8 @@ import EmailCard from "@/components/EmailCard";
 import EmailListContainer from "@/components/EmailList";
 import { useState } from "react";
 import EmailContent from "@/components/EmailContent";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftToLine } from "lucide-react";
 const Home = () => {
   const [isWide, setIsWide] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
@@ -28,7 +30,15 @@ const Home = () => {
           </div>
         ))}
       </EmailListContainer>
-
+      <Button
+        className={`${
+          isWide ? "hidden" : "sm:hidden"
+        } mb-3 absolute translate-y--20`}
+        onClick={toggleWidth}
+      >
+        <ArrowLeftToLine />
+        back to list
+      </Button>
       <EmailContent
         isWide={isWide}
         text={

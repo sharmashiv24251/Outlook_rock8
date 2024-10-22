@@ -70,3 +70,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.hide_scroll_bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

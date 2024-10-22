@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Nav = () => {
   return (
-    <nav className="flex justify-between text-xs sm:text-md md:text-base h-10 my-5">
+    <nav className="flex justify-between text-xs sm:text-md md:text-base h-10 mb-5 mt-0 sm:my-5">
       <div className="flex gap-3 justify-center items-center">
         <span>Filter By:</span>
         <Link href={"/"} className="p-2 rounded-md">
