@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased my-5 `}
+        className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased p-5 sm:p-0`}
       >
         <ThemeProvider
           attribute="class"
