@@ -1,11 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface Email {
-  id: string;
-  // other email properties
-}
-
 interface EmailStore {
   readEmails: string[];
   favoriteEmails: string[];

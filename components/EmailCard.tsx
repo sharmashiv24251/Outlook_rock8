@@ -2,17 +2,7 @@ import React from "react";
 import { Card } from "./ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { formatDate } from "@/utils/dateFormatter";
-
-export interface EmailType {
-  id: string;
-  from: {
-    email: string;
-    name: string;
-  };
-  date: number;
-  subject: string;
-  short_description: string;
-}
+import { Email } from "@/types";
 
 const EmailCard = ({
   email,
@@ -20,7 +10,7 @@ const EmailCard = ({
   isFavourite,
   isSelected,
 }: {
-  email: EmailType;
+  email: Email;
   isRead: boolean;
   isFavourite: boolean;
   isSelected: boolean;
