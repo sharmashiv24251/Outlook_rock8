@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeftToLine } from "lucide-react";
 import { useEmailStore } from "@/store";
 import { useSearchParams } from "next/navigation";
-import { useFetchEmailBody, useFetchEmails, useWindowSize } from "@/hooks";
+import { useFetchEmailBody, useFetchEmails } from "@/hooks";
 
 const Home = () => {
   const [isWide, setIsWide] = useState(true);
   const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
-  const { isMobile } = useWindowSize();
+
   const { readEmails, favoriteEmails, markAsRead } = useEmailStore();
   const searchParams = useSearchParams();
 
@@ -37,13 +37,9 @@ const Home = () => {
     (emailId: string) => {
       setSelectedEmailId(emailId);
       markAsRead(emailId);
-      if (isMobile) {
-        setIsWide(false);
-      } else {
-        setIsWide(false);
-      }
+      setIsWide(false);
     },
-    [isMobile, markAsRead]
+    [markAsRead]
   );
 
   const selectedEmail = emails
