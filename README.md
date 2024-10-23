@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Email Client Pro
+
+A modern email client application built with Next.js, TypeScript, and Zustand, offering a sleek and responsive user interface similar to popular email clients like Outlook.
+
+
+![demo](https://github.com/user-attachments/assets/24658511-2f36-400c-8d98-5bd572c15380)
+
+## Features
+
+- **Split View Interface**: Master-slave layout with email list and body views
+- **Real-time Email Loading**: Dynamic email body loading on selection
+- **Email Management**:
+  - Mark emails as favorite
+  - Track read/unread status
+  - Filter emails by favorites, read, and unread status
+- **Smart Pagination**: Efficient handling of large email lists
+- **Persistent Storage**: Maintains user preferences and email states across sessions
+- **Responsive Design**: Seamless experience across all device sizes
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js 15
+- **Language**: TypeScript
+- **State Management**: Zustand
+- **Data Fetching**: TanStack Query (React Query)
+- **Package Manager**: Bun/npm
+- **Styling**: Tailwind css , shadcn ui with semantic HTML
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sharmashiv24251/Outlook_rock8.git)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+# Using Bun
+bun install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Using npm
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the development server:
+```bash
+# Using Bun
+bun run dev
 
-## Learn More
+# Using npm
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Integration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The application integrates with the following endpoints:
 
-## Deploy on Vercel
+- **Email List**: `GET https://flipkart-email-mock.now.sh/`
+  - Supports pagination: `?page={pageNumber}`
+- **Email Details**: `GET https://flipkart-email-mock.now.sh/?id={emailId}`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Built with ❤️ using modern web technologies
