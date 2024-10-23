@@ -1,29 +1,19 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Email } from "@/types";
 
+const fetchEmails = async () => {
+  const response = await axios.get("https://flipkart-email-mock.now.sh/");
+  return response.data.list; // Extracting the list of emails
+};
+
 const useFetchEmails = () => {
-  const [data, setData] = useState<Email[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, error, isLoading } = useQuery<Email[], Error>({
+    queryKey: ["emails"], // Unique key for the query
+    queryFn: fetchEmails, // Function to fetch data
+  });
 
-  useEffect(() => {
-    const fetchEmails = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("https://flipkart-email-mock.now.sh/");
-        setData(response.data.list); // Extracting the list of emails
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEmails();
-  }, []); // Empty dependency array means this runs once on mount
-
-  return { data, loading, error };
+  return { data, error, loading: isLoading };
 };
 
 export default useFetchEmails;

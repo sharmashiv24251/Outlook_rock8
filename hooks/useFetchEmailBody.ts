@@ -1,30 +1,23 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const useFetchEmailBody = ({ id }: { id: string }) => {
-  const [body, setBody] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const fetchEmailBody = async () => {
+    const response = await axios.get(
+      `https://flipkart-email-mock.vercel.app/?id=${id}`
+    );
+    return response.data.body; // Extracting the body from the response
+  };
 
-  useEffect(() => {
-    const fetchBody = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `https://flipkart-email-mock.vercel.app/?id=${id}`
-        );
-        setBody(response.data.body); // Extracting the body from the response
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchBody();
-    }
-  }, [id]); // Dependency on id to refetch when it changes
+  const {
+    data: body,
+    isLoading: loading,
+    error,
+  } = useQuery({
+    queryKey: ["emailBody", id], // Unique key for caching and refetching
+    queryFn: fetchEmailBody,
+    enabled: !!id, // Only run the query if id is defined
+  });
 
   return { body, loading, error };
 };

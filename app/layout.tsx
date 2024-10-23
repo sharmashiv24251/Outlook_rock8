@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "../components/Nav";
 import { ThemeProvider } from "../components/theme-provider";
+import QueryClientProviderWrapper from "@/components/QueryProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,20 +27,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased p-5 sm:p-0`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <QueryClientProviderWrapper>
+      <html lang="en">
+        <body
+          className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased p-5 sm:p-0`}
         >
-          <Nav />
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Nav />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </QueryClientProviderWrapper>
   );
 }
