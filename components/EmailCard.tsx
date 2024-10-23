@@ -14,9 +14,23 @@ export interface EmailType {
   short_description: string;
 }
 
-const EmailCard = ({ email }: { email: EmailType }) => {
+const EmailCard = ({
+  email,
+  isRead,
+  isFavourite,
+  isSelected,
+}: {
+  email: EmailType;
+  isRead: boolean;
+  isFavourite: boolean;
+  isSelected: boolean;
+}) => {
   return (
-    <Card className="cursor-pointer p-3 light:text-[#636363] light:border-[#CFD2DC] rounded-lg flex gap-4 md:gap-2">
+    <Card
+      className={`cursor-pointer p-3 light:text-[#636363] light:border-[#CFD2DC] rounded-lg flex gap-4 md:gap-2
+        ${isRead ? "bg-[#F2F2F2] dark:bg-card/20" : ""}
+        ${isSelected ? "border-primary" : ""}`}
+    >
       <Avatar className="h-12 w-12 text-2xl mx-2 lg:mx-5">
         <AvatarFallback className="font-bold">
           {email.from.name.split("")[0][0].toUpperCase()}
@@ -38,7 +52,11 @@ const EmailCard = ({ email }: { email: EmailType }) => {
           <p>{email.short_description}</p>
           <p>
             {formatDate(email.date)}
-            <span className="text-[#E54065] font-semibold ml-5">Favourite</span>
+            {isFavourite && (
+              <span className="text-[#E54065] font-semibold ml-5">
+                Favourite
+              </span>
+            )}
           </p>
         </div>
       </div>

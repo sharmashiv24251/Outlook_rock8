@@ -2,9 +2,9 @@ import React from "react";
 import { Card } from "./ui/card";
 import { EmailType } from "@/dummy_data";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import { Button } from "./ui/button";
 import Loader from "./ui/loader";
 import { formatDate } from "@/utils/dateFormatter";
+import FavoriteButton from "./FavButton";
 
 const EmailContent = ({
   isWide = true,
@@ -28,8 +28,6 @@ const EmailContent = ({
   );
 };
 
-export default EmailContent;
-
 const Content = ({ email, text }: { email: EmailType; text: string }) => {
   return (
     <div className="flex max-md:flex-col gap-5 mt-3">
@@ -40,11 +38,10 @@ const Content = ({ email, text }: { email: EmailType; text: string }) => {
       </Avatar>
       <div className="flex flex-col gap-5 mt-3">
         <div className="w-full flex justify-between items-center">
-          <span className="text-2xl font-bold"> {email.subject}</span>
-          <Button className="rounded-full">Mark As Favourite</Button>
+          <span className="text-2xl font-bold">{email.subject}</span>
+          <FavoriteButton emailId={email.id} />
         </div>
         <p>{formatDate(email.date)}</p>
-
         <div
           className="text-justify email-content"
           dangerouslySetInnerHTML={{ __html: text }}
@@ -53,3 +50,5 @@ const Content = ({ email, text }: { email: EmailType; text: string }) => {
     </div>
   );
 };
+
+export default EmailContent;
