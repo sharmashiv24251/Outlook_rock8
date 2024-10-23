@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+"use client";
 import localFont from "next/font/local";
 import "./globals.css";
-import Nav from "../components/Nav";
 import { ThemeProvider } from "../components/theme-provider";
 import QueryClientProviderWrapper from "@/components/QueryProvider";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+const DynamicNav = dynamic(() => import("@/components/Nav"), {
+  ssr: false, // This ensures the component is only rendered on the client side
+});
+const DynamicPage = dynamic(() => import("@/app/page"), {
+  ssr: false, // This ensures the component is only rendered on the client side
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,11 +22,6 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
-export const metadata: Metadata = {
-  title: "Outlook_rock8",
-  description: "assignment 1",
-};
 
 export default function RootLayout({
   children,
@@ -38,8 +40,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Nav />
-            {children}
+            <Suspense fallback={<div>Loading...</div>}>
+              <DynamicNav />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <DynamicPage />
+            </Suspense>
           </ThemeProvider>
         </body>
       </html>

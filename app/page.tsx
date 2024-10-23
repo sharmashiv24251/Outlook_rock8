@@ -6,11 +6,9 @@ import { useCallback, useState } from "react";
 import EmailContent from "@/components/EmailContent";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftToLine } from "lucide-react";
-import useFetchEmails from "@/hooks/useFetchEmails";
-import useFetchEmailBody from "@/hooks/useFetchEmailBody";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { useEmailStore } from "@/store";
 import { useSearchParams } from "next/navigation";
+import { useFetchEmailBody, useFetchEmails, useWindowSize } from "@/hooks";
 
 const Home = () => {
   const [isWide, setIsWide] = useState(true);
