@@ -2,30 +2,22 @@
 
 import EmailCard from "@/components/EmailCard";
 import EmailListContainer from "@/components/EmailList";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import EmailContent from "@/components/EmailContent";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftToLine } from "lucide-react";
 import useFetchEmails from "@/hooks/useFetchEmails";
 import useFetchEmailBody from "@/hooks/useFetchEmailBody";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 const Home = () => {
   const [isWide, setIsWide] = useState(true);
   const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
+  const { isMobile } = useWindowSize();
 
   // Toggle function to change width
   const toggleWidth = () => {
     setIsWide((prev) => !prev);
-  };
-
-  // Function to handle email selection
-  const handleSelectEmail = (emailId: string) => {
-    if (window.innerWidth <= 768) {
-      toggleWidth();
-    } else {
-      setIsWide(false);
-    }
-    setSelectedEmailId(emailId);
   };
 
   const {
@@ -38,7 +30,23 @@ const Home = () => {
     body: emailBody,
     loading: bodyLoading,
     error: bodyError,
-  } = useFetchEmailBody({ id: selectedEmailId });
+  } = useFetchEmailBody({ id: selectedEmailId! });
+
+  const handleSelectEmail = useCallback(
+    (emailId: string) => {
+      setSelectedEmailId(emailId);
+      if (isMobile) {
+        setIsWide(false);
+      } else {
+        setIsWide(false);
+      }
+    },
+    [isMobile]
+  );
+
+  const selectedEmail = emails
+    ? emails.find((email) => email.id === selectedEmailId)
+    : null;
 
   return (
     <main className="flex gap-4 h-[calc(100vh-80px)]">
@@ -69,7 +77,7 @@ const Home = () => {
               : emailBody || "Error Fetching email content."
           }
           isLoading={bodyLoading}
-          email={emails?.find((email) => email.id === selectedEmailId)} // Get the full email object for display
+          email={selectedEmail!}
         />
       )}
     </main>

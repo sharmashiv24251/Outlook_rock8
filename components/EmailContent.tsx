@@ -4,6 +4,7 @@ import { EmailType } from "@/dummy_data";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import Loader from "./ui/loader";
+import { formatDate } from "@/utils/dateFormatter";
 
 const EmailContent = ({
   isWide = true,
@@ -16,48 +17,39 @@ const EmailContent = ({
   email: EmailType;
   isLoading: boolean;
 }) => {
-  // Apply classes based on state
   const widthClass = isWide ? "hidden" : "md:w-2/3 w-full";
 
   return (
     <Card
       className={`h-full bg-card ${widthClass} text-sm transition-all duration-300 pl-5 pr-10 max-md:px-5 py-5 rounded-lg light:text-[#636363] overflow-scroll max-md:mt-12 max-md:pb-52 hide_scroll_bar`}
     >
-      {isLoading ? (
-        <div className="flex items-center justify-center h-full">
-          <Loader />
-        </div>
-      ) : (
-        <div className="flex max-md:flex-col gap-5">
-          <Avatar className="h-14 w-14 text-2xl">
-            <AvatarFallback className="font-bold">
-              {email.from.name.split("")[0][0].toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col gap-5 mt-3">
-            <div className="w-full flex justify-between items-center">
-              <span className="text-2xl font-bold"> {email.subject}</span>
-              <Button className="rounded-full">Mark As Favourite</Button>
-            </div>
-            <p>
-              {new Date(email.date).toLocaleString("en-US", {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-              })}
-            </p>
-
-            <div
-              className="text-justify email-content"
-              dangerouslySetInnerHTML={{ __html: text }}
-            />
-          </div>
-        </div>
-      )}
+      {isLoading ? <Loader /> : <Content email={email} text={text} />}
     </Card>
   );
 };
 
 export default EmailContent;
+
+const Content = ({ email, text }: { email: EmailType; text: string }) => {
+  return (
+    <div className="flex max-md:flex-col gap-5 mt-3">
+      <Avatar className="h-14 w-14 text-2xl mt-1">
+        <AvatarFallback className="font-bold">
+          {email.from.name.split("")[0][0].toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col gap-5 mt-3">
+        <div className="w-full flex justify-between items-center">
+          <span className="text-2xl font-bold"> {email.subject}</span>
+          <Button className="rounded-full">Mark As Favourite</Button>
+        </div>
+        <p>{formatDate(email.date)}</p>
+
+        <div
+          className="text-justify email-content"
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
+      </div>
+    </div>
+  );
+};
