@@ -20,7 +20,7 @@ const Home = () => {
 
   // Function to handle email selection
   const handleSelectEmail = (emailId: string) => {
-    if (window.innerWidth <= 640) {
+    if (window.innerWidth <= 768) {
       toggleWidth();
     } else {
       setIsWide(false);
@@ -53,7 +53,7 @@ const Home = () => {
       </EmailListContainer>
       <Button
         className={`${
-          isWide ? "hidden" : "sm:hidden"
+          isWide ? "hidden" : "md:hidden"
         } mb-3 absolute translate-y--20`}
         onClick={toggleWidth}
       >
@@ -66,7 +66,7 @@ const Home = () => {
           text={
             bodyLoading
               ? "Loading email content..."
-              : emailBody || "No content available."
+              : emailBody || "Error Fetching email content."
           }
           isLoading={bodyLoading}
           email={emails?.find((email) => email.id === selectedEmailId)} // Get the full email object for display

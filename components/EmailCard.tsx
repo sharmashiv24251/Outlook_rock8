@@ -16,7 +16,7 @@ export interface EmailType {
 const EmailCard = ({ email }: { email: EmailType }) => {
   return (
     <Card className="cursor-pointer  p-3 light:text-[#636363] light:border-[#CFD2DC] rounded-lg">
-      <div className="flex gap-4 sm:gap-2">
+      <div className="flex gap-4 md:gap-2">
         <Avatar className="h-12 w-12 text-2xl">
           <AvatarFallback className="font-bold">
             {email.from.name.split("")[0][0].toUpperCase()}

@@ -30,7 +30,7 @@ export default function RootLayout({
     <QueryClientProviderWrapper>
       <html lang="en">
         <body
-          className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased p-5 sm:p-0`}
+          className={`container mx-auto ${geistSans.variable} ${geistMono.variable} antialiased p-5 md:p-0`}
         >
           <ThemeProvider
             attribute="class"

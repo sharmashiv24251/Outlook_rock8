@@ -17,18 +17,18 @@ const EmailContent = ({
   isLoading: boolean;
 }) => {
   // Apply classes based on state
-  const widthClass = isWide ? "hidden" : "sm:w-2/3 w-full";
+  const widthClass = isWide ? "hidden" : "md:w-2/3 w-full";
 
   return (
     <Card
-      className={`h-full bg-card ${widthClass} text-sm transition-all duration-300 pl-5 pr-10 max-sm:px-5 py-5 rounded-lg light:text-[#636363] overflow-scroll max-sm:mt-12 max-sm:pb-52 hide_scroll_bar`}
+      className={`h-full bg-card ${widthClass} text-sm transition-all duration-300 pl-5 pr-10 max-md:px-5 py-5 rounded-lg light:text-[#636363] overflow-scroll max-md:mt-12 max-md:pb-52 hide_scroll_bar`}
     >
       {isLoading ? (
         <div className="flex items-center justify-center h-full">
           <Loader />
         </div>
       ) : (
-        <div className="flex max-sm:flex-col gap-5">
+        <div className="flex max-md:flex-col gap-5">
           <Avatar className="h-14 w-14 text-2xl">
             <AvatarFallback className="font-bold">
               {email.from.name.split("")[0][0].toUpperCase()}
